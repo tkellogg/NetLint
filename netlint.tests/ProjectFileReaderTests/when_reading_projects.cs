@@ -6,7 +6,7 @@ using NUnit.Framework;
 using System.Xml;
 using System.IO;
 using Moq;
-using netlint;
+using netlint.framework;
 
 namespace netlint.tests.ProjectFileReaderTests
 {

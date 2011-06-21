@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IFileGlobber.cs" />
+    <Compile Include="framework\IFileGlobber.cs" />
     <Compile Include="NetLint.cs" />
-    <Compile Include="ProjectFileReader.cs" />
+    <Compile Include="framework\ProjectFileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
