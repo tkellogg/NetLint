@@ -12,7 +12,7 @@ namespace netlint
 		private IProjectFileReader reader;
 		private IFileGlobber globber;
 
-		public NetLint(string projName)
+		internal NetLint(string projName)
 			:this(projName, new FileGlobber(), null)
 		{
 			this.reader = new ProjectFileReader(this.globber);
@@ -32,10 +32,27 @@ namespace netlint
 
 		public void Execute()
 		{
-			foreach (var item in reader.GetContents(projName))
-			{
-				
-			}
+			var runner = new Accumulator(projName, reader.GetContents(projName));
+			runner.Execute();
+		}
+
+		public static void CheckWebProject(string projName)
+		{
+			var g = GetWebGlobber();
+			var program = new NetLint(projName, g, new ProjectFileReader(g));
+			program.Execute();
+		}
+
+		private static FileGlobber GetWebGlobber()
+		{
+			var g = new FileGlobber();
+			g.AddPattern("*.cshtml");
+			g.AddPattern("*.html");
+			g.AddPattern("*.aspx");
+			g.AddPattern("*.ascx");
+			g.AddPattern("*.js");
+			g.AddPattern("*.css");
+			return g;
 		}
 	}
 }

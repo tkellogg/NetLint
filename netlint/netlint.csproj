@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="framework\Accumulator.cs" />
     <Compile Include="framework\FileGlobber.cs" />
     <Compile Include="framework\IFileGlobber.cs" />
+    <Compile Include="framework\IProjectFileReader.cs" />
+    <Compile Include="framework\NetLintException.cs" />
     <Compile Include="NetLint.cs" />
     <Compile Include="framework\ProjectFileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
