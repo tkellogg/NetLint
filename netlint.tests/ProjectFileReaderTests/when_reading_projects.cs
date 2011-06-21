@@ -49,10 +49,14 @@ namespace netlint.tests.ProjectFileReaderTests
 <Project>
 	<ItemGroup>
 		<Content Include='blah.html' />
-	<ItemGroup>
+	</ItemGroup>
 </Project>			
 ";
-			var sut = new ProjectFileReader(Mock.Of<IFileGlobber>());
+			var mock = Mock.Of<IFileGlobber>(x => x.ShouldCheckFile(It.IsAny<string>()) == true);
+			var sut = new ProjectFileReader(mock);
+			var result = sut.GetContents(UseXml(xml)).ToList();
+
+			Assert.That(result, Is.EquivalentTo(new[] { "blah.html" }));
 		}
 	}
 }

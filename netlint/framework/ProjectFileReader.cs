@@ -23,7 +23,7 @@ namespace netlint.framework
 			var nodes = xml.SelectNodes("//Content/@Include").Cast<XmlAttribute>();
 
 			return from x in nodes
-				   where globber.ShouldCheckFile(x.InnerText)
+				   where globber.ShouldCheckFile(x.Value)
 				   select x.InnerText;
 		}
 	}
