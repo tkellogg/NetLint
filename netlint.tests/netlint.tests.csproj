@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileGlobberTetss\when_including_files.cs" />
     <Compile Include="ProjectFileReaderTests\when_reading_projects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
