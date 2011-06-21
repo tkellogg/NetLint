@@ -2,22 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace netlint.framework
 {
 	internal class FileGlobber : IFileGlobber
 	{
-		List<string> includePatterns = new List<string>();
+		List<Regex> includePatterns = new List<Regex>();
 
 		public void AddPattern(string pattern, bool exclude=false)
 		{
 			if (!exclude)
-				includePatterns.Add(pattern);
+			{
+				var re = new Regex(Escape(pattern));
+				includePatterns.Add(re);
+			}
+		}
+
+		private string Escape(string pattern)
+		{
+			return pattern.Replace("*", ".*").Replace('/', '\\').Replace("\\", "(\\\\|/)");
 		}
 
 		public bool ShouldCheckFile(string filename)
 		{
-			return includePatterns.Contains(filename);
+			return includePatterns.Any(re => re.IsMatch(filename));
 		}
 
 	}
