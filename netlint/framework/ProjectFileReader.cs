@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace netlint.framework
 {
-	internal class ProjectFileReader
+	internal class ProjectFileReader : netlint.framework.IProjectFileReader
 	{
 		private IFileGlobber globber;
 
