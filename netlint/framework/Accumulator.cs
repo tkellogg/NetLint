@@ -41,12 +41,13 @@ namespace netlint.framework
 
 		private void Walk(DirectoryInfo current)
 		{
-			var files = this.files.Select(x => new FileInfo(Path.Combine(baseDir, x)));
+			var files = this.files.Select(x => new FileInfo(Path.Combine(baseDir, x)))
+				.Select(x => x.FullName);
 			foreach (var fsi in current.GetFileSystemInfos())
 			{
 				if (fsi is FileInfo)
 				{
-					if (!files.Contains(fsi) && globber.ShouldCheckFile(fsi.FullName))
+					if (!files.Contains(fsi.FullName) && globber.ShouldCheckFile(fsi.FullName))
 					{
 						extra.Add(fsi.FullName);
 					}
