@@ -7,11 +7,11 @@ namespace netlint.framework
 {
 	public class NetLintException : ApplicationException
 	{
-		private List<string> missing;
+		public List<string> Missing { get; private set; }
 
 		public NetLintException(List<string> missing)
 		{
-			this.missing = missing;
+			Missing = missing;
 		}
 
 		public override string Message
@@ -19,7 +19,7 @@ namespace netlint.framework
 			get
 			{
 				var sb = new StringBuilder("Missing files: \r\n");
-				foreach (var file in missing)
+				foreach (var file in Missing)
 				{
 					sb.AppendFormat("    {0}", file);
 				}

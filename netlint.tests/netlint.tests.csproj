@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileGlobberTetss\when_including_files.cs" />
+    <Compile Include="IntegrationTests\when_some_files_are_missing_on_disk.cs" />
     <Compile Include="ProjectFileReaderTests\when_reading_projects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +67,9 @@
       <Project>{3142F01B-E79F-4B98-8578-DE1C45196F6F}</Project>
       <Name>netlint</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="fixtures\MissingFiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

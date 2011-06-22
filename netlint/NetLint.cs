@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using netlint.framework;
+using System.IO;
 
 namespace netlint
 {
@@ -32,7 +33,8 @@ namespace netlint
 
 		public void Execute()
 		{
-			var runner = new Accumulator(projName, reader.GetContents(projName));
+			var baseDir = Directory.GetParent(projName);
+			var runner = new Accumulator(baseDir.ToString(), reader.GetContents(projName));
 			runner.Execute();
 		}
 
@@ -52,6 +54,8 @@ namespace netlint
 			g.AddPattern("*.ascx");
 			g.AddPattern("*.js");
 			g.AddPattern("*.css");
+			g.AddPattern("*.gif");
+			g.AddPattern("*.png");
 			return g;
 		}
 	}

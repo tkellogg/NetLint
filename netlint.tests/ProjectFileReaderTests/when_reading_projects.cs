@@ -58,5 +58,22 @@ namespace netlint.tests.ProjectFileReaderTests
 
 			Assert.That(result, Is.EquivalentTo(new[] { "blah.html" }));
 		}
+
+		[Test]
+		public void it_doesnt_choke_on_xml_namespace()
+		{
+			string xml = @"
+<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+	<ItemGroup>
+		<Content Include=""blah.html"" />
+	</ItemGroup>
+</Project>			
+";
+			var mock = Mock.Of<IFileGlobber>(x => x.ShouldCheckFile(It.IsAny<string>()) == true);
+			var sut = new ProjectFileReader(mock);
+			var result = sut.GetContents(UseXml(xml)).ToList();
+
+			Assert.That(result, Is.EquivalentTo(new[] { "blah.html" }));
+		}
 	}
 }

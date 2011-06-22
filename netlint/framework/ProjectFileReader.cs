@@ -20,7 +20,12 @@ namespace netlint.framework
 			var xml = new XmlDocument();
 			xml.Load(file);
 
-			var nodes = xml.SelectNodes("//Content/@Include").Cast<XmlAttribute>();
+			var ns = new XmlNamespaceManager(xml.NameTable);
+			ns.AddNamespace("msb", "http://schemas.microsoft.com/developer/msbuild/2003");
+
+			var nodes = xml.DocumentElement.SelectNodes("//msb:Content[@Include]/@Include", ns).Cast<XmlAttribute>();
+			// or maybe without the namespace?
+			nodes = nodes.Any() ? nodes : xml.DocumentElement.SelectNodes("//Content[@Include]/@Include", ns).Cast<XmlAttribute>();
 
 			return from x in nodes
 				   where globber.ShouldCheckFile(x.Value)

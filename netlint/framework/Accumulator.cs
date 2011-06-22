@@ -20,8 +20,9 @@ namespace netlint.framework
 
 		public void Execute()
 		{
-			foreach (var file in files)
+			foreach (var name in files)
 			{
+				var file = Path.Combine(baseDir, name);
 				if (!File.Exists(file))
 				{
 					missing.Add(file);
