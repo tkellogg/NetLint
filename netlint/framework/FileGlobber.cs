@@ -25,7 +25,48 @@ namespace netlint.framework
 
 		private string Escape(string pattern)
 		{
-			return pattern.Replace("*", ".*").Replace('/', '\\').Replace("\\", "(\\\\|/)");
+			var sb = new StringBuilder();
+			foreach (char c in pattern)
+			{
+				switch (c)
+				{
+					case '*':
+						sb.Append(".*");
+						break;
+					case '.':
+						sb.Append("[.]");
+						break;
+					case '/':
+						sb.Append("(\\\\|/)");
+						break;
+					case '\\':
+						sb.Append("(\\\\|/)");
+						break;
+					case '(':
+						sb.Append("[(]");
+						break;
+					case ')':
+						sb.Append("[)]");
+						break;
+					case '[':
+						sb.Append("\\[");
+						break;
+					case ']':
+						sb.Append("\\]");
+						break;
+					case '{':
+						sb.Append("\\{");
+						break;
+					case '}':
+						sb.Append("\\}");
+						break;
+
+					default:
+						sb.Append(c);
+						break;
+				}
+			}
+			return sb.ToString();
 		}
 
 		public bool ShouldCheckFile(string filename)
