@@ -24,5 +24,20 @@ namespace netlint.tests.IntegrationTests
 				Assert.That(e.Missing, Has.Count.EqualTo(3));
 			}
 		}
+
+		[Test]
+		public void it_will_properly_ignore()
+		{
+			try
+			{
+				NetLint.CheckWebProject(@"..\..\fixtures\MissingFiles\MissingFiles.csproj",
+					x => x.IgnorePattern("*.cshtml"));
+				Assert.Fail("we're supposed to be testing the exception here");
+			}
+			catch (NetLintException e)
+			{
+				Assert.That(e.Missing, Has.Count.EqualTo(2));
+			}
+		}
 	}
 }

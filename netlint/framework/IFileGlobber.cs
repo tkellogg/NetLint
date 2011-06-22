@@ -8,6 +8,7 @@ namespace netlint.framework
 	public interface IFileGlobber
 	{
 		bool ShouldCheckFile(string filename);
-		void AddPattern(string pattern, bool exclude = false);
+		void AddPattern(string pattern);
+		void IgnorePattern(string pattern);
 	}
 }

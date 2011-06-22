@@ -26,11 +26,6 @@ namespace netlint
 			this.reader = reader;
 		}
 
-		public void AddPattern(string pattern, bool exclude = false)
-		{
-			globber.AddPattern(pattern, exclude);
-		}
-
 		public void Execute()
 		{
 			var baseDir = Directory.GetParent(projName);
@@ -38,9 +33,13 @@ namespace netlint
 			runner.Execute();
 		}
 
-		public static void CheckWebProject(string projName)
+		public static void CheckWebProject(string projName, Action<IFileGlobber> config=null)
 		{
 			var g = GetWebGlobber();
+
+			if (config != null)
+				config(g);
+
 			var program = new NetLint(projName, g, new ProjectFileReader(g));
 			program.Execute();
 		}

@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileGlobberTetss\when_excluding_files.cs" />
     <Compile Include="FileGlobberTetss\when_including_files.cs" />
     <Compile Include="IntegrationTests\when_some_files_are_missing_on_disk.cs" />
     <Compile Include="ProjectFileReaderTests\when_reading_projects.cs" />

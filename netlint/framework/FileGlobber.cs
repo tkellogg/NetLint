@@ -9,14 +9,18 @@ namespace netlint.framework
 	internal class FileGlobber : IFileGlobber
 	{
 		List<Regex> includePatterns = new List<Regex>();
+		List<Regex> excludePatterns = new List<Regex>();
 
-		public void AddPattern(string pattern, bool exclude=false)
+		public void AddPattern(string pattern)
 		{
-			if (!exclude)
-			{
-				var re = new Regex(Escape(pattern));
-				includePatterns.Add(re);
-			}
+			var re = new Regex(Escape(pattern));
+			includePatterns.Add(re);
+		}
+
+		public void IgnorePattern(string pattern)
+		{
+			var re = new Regex(Escape(pattern));
+			excludePatterns.Add(re);
 		}
 
 		private string Escape(string pattern)
@@ -26,7 +30,8 @@ namespace netlint.framework
 
 		public bool ShouldCheckFile(string filename)
 		{
-			return includePatterns.Any(re => re.IsMatch(filename));
+			return includePatterns.Any(re => re.IsMatch(filename)) 
+				&& !excludePatterns.Any(re => re.IsMatch(filename));
 		}
 
 	}
