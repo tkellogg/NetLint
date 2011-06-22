@@ -7,11 +7,20 @@ namespace netlint.framework
 {
 	public class NetLintException : ApplicationException
 	{
+		/// <summary>
+		/// Indicates files that are missing from disk
+		/// </summary>
 		public List<string> Missing { get; private set; }
 
-		public NetLintException(List<string> missing)
+		/// <summary>
+		/// Indicates files that were on disk but missing from the project file
+		/// </summary>
+		public List<string> Extra { get; private set; }
+
+		public NetLintException(List<string> missing, List<string> extra)
 		{
 			Missing = missing;
+			Extra = extra;
 		}
 
 		public override string Message

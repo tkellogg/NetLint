@@ -29,7 +29,7 @@ namespace netlint
 		public void Execute()
 		{
 			var baseDir = Directory.GetParent(projName);
-			var runner = new Accumulator(baseDir.ToString(), reader.GetContents(projName));
+			var runner = new Accumulator(baseDir.ToString(), reader.GetContents(projName), globber);
 			runner.Execute();
 		}
 
