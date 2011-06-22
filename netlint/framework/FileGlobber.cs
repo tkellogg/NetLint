@@ -13,13 +13,13 @@ namespace netlint.framework
 
 		public void AddPattern(string pattern)
 		{
-			var re = new Regex(Escape(pattern));
+			var re = new Regex(Escape(pattern), RegexOptions.IgnoreCase);
 			includePatterns.Add(re);
 		}
 
 		public void IgnorePattern(string pattern)
 		{
-			var re = new Regex(Escape(pattern));
+			var re = new Regex(Escape(pattern), RegexOptions.IgnoreCase);
 			excludePatterns.Add(re);
 		}
 

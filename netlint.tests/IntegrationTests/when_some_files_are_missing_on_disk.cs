@@ -31,7 +31,7 @@ namespace netlint.tests.IntegrationTests
 			try
 			{
 				NetLint.CheckWebProject(@"..\..\fixtures\MissingFiles\MissingFiles.csproj",
-					x => x.IgnorePattern("*.cshtml"));
+					config => config.IgnorePattern("*.cshtml"));
 				Assert.Fail("we're supposed to be testing the exception here");
 			}
 			catch (NetLintException e)
