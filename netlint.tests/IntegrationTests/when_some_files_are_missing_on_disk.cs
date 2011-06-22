@@ -21,7 +21,7 @@ namespace netlint.tests.IntegrationTests
 			}
 			catch (NetLintException e)
 			{
-				Assert.That(e.Missing, Has.Count.EqualTo(3));
+				Assert.That(e.Missing, Has.Count.EqualTo(5));
 			}
 		}
 
@@ -36,7 +36,7 @@ namespace netlint.tests.IntegrationTests
 			}
 			catch (NetLintException e)
 			{
-				Assert.That(e.Missing, Has.Count.EqualTo(2));
+				Assert.That(e.Missing, Has.Count.EqualTo(4));
 			}
 		}
 	}

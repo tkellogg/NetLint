@@ -48,13 +48,19 @@ namespace netlint
 		{
 			var g = new FileGlobber();
 			g.AddPattern("*.cshtml");
+			g.AddPattern("*.vbhtml");
 			g.AddPattern("*.html");
 			g.AddPattern("*.aspx");
 			g.AddPattern("*.ascx");
+			g.AddPattern("*.asax");
 			g.AddPattern("*.js");
 			g.AddPattern("*.css");
 			g.AddPattern("*.gif");
 			g.AddPattern("*.png");
+			g.AddPattern("*.jpg");
+			g.AddPattern("*.jpeg");
+			g.AddPattern("*.ico");
+			g.AddPattern("*.config");
 			return g;
 		}
 	}
