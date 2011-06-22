@@ -14,3 +14,13 @@ This is how you might use NetLint in a test method:
         NetLint.CheckWebProject(@"..\WebApp\WebApp.csproj");
     }
 
+And if the defaults don't satisfy your needs, add extra config options:
+
+    [Test]
+    public void filesystem_advanced_usage()
+    {
+        NetLint.CheckkWebProject(@"..\WebApp\WebApp.csproj", config => {
+            config.IgnorePattern("*.txt");
+	    config.AddPattern("*.fshtml"); // coming soon ;)
+	});
+    }
