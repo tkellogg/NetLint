@@ -1,7 +1,9 @@
 NetLint: Sanity checks for .NET projects
 ========================================
 
-This tool is intended for doing simple checks on Visual Studio project files to make sure the files on disk match the files included in the project. This is mainly important with web projects where compilation doesn't ensure that your project file is missing important JavaScript files.
+This tool is intended for checking that the files in a ASP.NET web project (csproj file) match  what actually exists on the filesystem. We were noticing that after some merges, a JavaScript file might be incidentally dropped from the project file. We also noticed that QA wasn't particularly fond of us saying *oh, it's just a missing JavaScript file.*
+
+It's easiest when included in automated tests, though it has no dependencies on NUnit or any other testing framework. It reads the project file and looks for content that is supposed to be on disk, and it looks on disk for content that is supposed to be in the project file. If anything is out of place it fails with a detailed exception message summarizing all failures.
 
 Example Usage
 ---------------------------------------
@@ -21,6 +23,6 @@ And if the defaults don't satisfy your needs, add extra config options:
     {
         NetLint.CheckkWebProject(@"..\WebApp\WebApp.csproj", config => {
             config.IgnorePattern("*.txt");
-	    config.AddPattern("*.fshtml"); // coming soon ;)
-	});
+            config.AddPattern("*.fshtml"); // coming soon ;)
+        });
     }

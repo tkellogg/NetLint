@@ -75,5 +75,43 @@ namespace netlint.tests.ProjectFileReaderTests
 
 			Assert.That(result, Is.EquivalentTo(new[] { "blah.html" }));
 		}
+
+
+		[Test]
+		public void it_can_also_check_compiled_resources()
+		{
+			string xml = @"
+<Project>
+	<ItemGroup>
+		<Compile Include='Blah.cs' />
+		<Compile Include='Blah.fs' />
+	</ItemGroup>
+</Project>			
+";
+			var mock = Mock.Of<IFileGlobber>(x => x.ShouldCheckFile(It.IsAny<string>()) == true);
+			var sut = new ProjectFileReader(mock);
+			var result = sut.GetContents(UseXml(xml)).ToList();
+
+			Assert.That(result, Is.EquivalentTo(new[] { "Blah.cs", "Blah.fs" }));
+		}
+
+		[Test]
+		public void it_can_also_check_references()
+		{
+			string xml = @"
+<Project>
+	<ItemGroup>
+		<Reference Include=""Moq"">
+			<HintPath>..\packages\Moq.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+</Project>			
+";
+			var mock = Mock.Of<IFileGlobber>(x => x.ShouldCheckFile(It.IsAny<string>()) == true);
+			var sut = new ProjectFileReader(mock);
+			var result = sut.GetContents(UseXml(xml)).ToList();
+
+			Assert.That(result, Is.EquivalentTo(new[] { @"..\packages\Moq.dll" }));
+		}
 	}
 }

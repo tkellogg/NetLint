@@ -23,13 +23,26 @@ namespace netlint.framework
 			var ns = new XmlNamespaceManager(xml.NameTable);
 			ns.AddNamespace("msb", "http://schemas.microsoft.com/developer/msbuild/2003");
 
-			var nodes = xml.DocumentElement.SelectNodes("//msb:Content[@Include]/@Include", ns).Cast<XmlAttribute>();
-			// or maybe without the namespace?
-			nodes = nodes.Any() ? nodes : xml.DocumentElement.SelectNodes("//Content[@Include]/@Include", ns).Cast<XmlAttribute>();
-
+			var nodes = GetNodes(xml, "//{0}Content[@Include]/@Include", ns)
+				.Union(GetNodes(xml, "//{0}Compile[@Include]/@Include", ns))
+				.Union(GetNodes(xml, "//{0}Reference/HintPath", ns));
+			
 			return from x in nodes
-				   where globber.ShouldCheckFile(x.Value)
-				   select x.InnerText;
+				   where globber.ShouldCheckFile(x)
+				   select x;
+		}
+
+		private IEnumerable<string> GetNodes(XmlDocument xml, string xpathFormat, XmlNamespaceManager ns)
+		{
+			var format = string.Format(xpathFormat, string.Empty);
+			var nodes = xml.DocumentElement.SelectNodes(format, ns).Cast<XmlNode>();
+			// or maybe without the namespace?
+			if (!nodes.Any())
+			{
+				format = string.Format(xpathFormat, "msb:");
+				nodes = xml.DocumentElement.SelectNodes(format, ns).Cast<XmlNode>();
+			}
+			return nodes.Select(x => x is XmlAttribute ? ((XmlAttribute)x).Value : ((XmlElement)x).InnerText);
 		}
 	}
 }
