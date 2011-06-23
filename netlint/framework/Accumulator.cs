@@ -13,12 +13,14 @@ namespace netlint.framework
 		private IEnumerable<string> files;
 		private string baseDir;
 		private IFileGlobber globber;
+		private string projectFile;
 
-		public Accumulator(string baseDir, IEnumerable<string> files, IFileGlobber globber)
+		public Accumulator(string baseDir, IEnumerable<string> files, IFileGlobber globber, string projectFile)
 		{
 			this.baseDir = baseDir;
 			this.files = files;
 			this.globber = globber;
+			this.projectFile = projectFile;
 		}
 
 		public void Execute()
@@ -36,7 +38,7 @@ namespace netlint.framework
 			Walk(new DirectoryInfo(baseDir));
 
 			if (missing.Any() || extra.Any())
-				throw new NetLintException(missing, extra);
+				throw new NetLintException(projectFile, missing, extra);
 		}
 
 		private void Walk(DirectoryInfo current)
