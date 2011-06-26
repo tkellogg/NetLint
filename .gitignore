@@ -3,3 +3,4 @@
 [Oo]bj/
 TestResult.xml
 *.VisualState.xml
+dist/
