@@ -39,7 +39,11 @@ namespace netlint.framework
 			Walk(new DirectoryInfo(baseDir));
 
 			if (missing.Any() || extra.Any())
-				throw new NetLintException(projectFile, missing, extra);
+			{
+				var ex = new NetLintException(projectFile, missing, extra);
+				Console.WriteLine(ex.Message);
+				throw ex;
+			}
 		}
 
 		private void Walk(DirectoryInfo current)
