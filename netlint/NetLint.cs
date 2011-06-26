@@ -37,10 +37,11 @@ namespace netlint
 		/// <summary>
 		/// Execute the checks and throw a NetLintExcetion if something failed
 		/// </summary>
-		public void Execute()
+		public void Execute(bool shouldLog)
 		{
 			var baseDir = Directory.GetParent(projName);
-			var runner = new Accumulator(baseDir.ToString(), reader.GetContents(projName).ToList(), globber, projName);
+			var runner = new Accumulator(baseDir.ToString(), reader.GetContents(projName).ToList(), globber, projName
+				, new Logger(shouldLog));
 			runner.Execute();
 		}
 
@@ -51,7 +52,8 @@ namespace netlint
 		/// <param name="projName">relative or absolute path to the project file</param>
 		/// <param name="config">delegate to do extra configuration, like adding extra
 		/// patterns and ignores</param>
-		public static void CheckWebProject(string projName, Action<IFileGlobber> config=null)
+		/// <param name="shouldLog"></param>
+		public static void CheckWebProject(string projName, Action<IFileGlobber> config = null, bool shouldLog = true)
 		{
 			var g = GetWebGlobber();
 
@@ -59,7 +61,7 @@ namespace netlint
 				config(g);
 
 			var program = new NetLint(projName, g, new ProjectFileReader(g));
-			program.Execute();
+			program.Execute(shouldLog);
 		}
 
 		private static FileGlobber GetWebGlobber()
@@ -95,7 +97,8 @@ namespace netlint
 		/// <param name="projName">relative or absolute path to the project file</param>
 		/// <param name="config">delegate to do extra configuration, like adding extra
 		/// patterns and ignores</param>
-		public static void CheckCoreFiles(string projName, Action<IFileGlobber> config = null)
+		/// <param name="shouldLog"></param>
+		public static void CheckCoreFiles(string projName, Action<IFileGlobber> config = null, bool shouldLog = true)
 		{
 			var g = GetCoreGlobber();
 			StandardIgnores(g);
@@ -104,7 +107,7 @@ namespace netlint
 				config(g);
 
 			var program = new NetLint(projName);
-			program.Execute();
+			program.Execute(shouldLog);
 		}
 
 		private static FileGlobber GetCoreGlobber()

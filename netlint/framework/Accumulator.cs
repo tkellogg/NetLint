@@ -14,14 +14,16 @@ namespace netlint.framework
 		private string baseDir;
 		private IFileGlobber globber;
 		private string projectFile;
+		private Logger logger;
 
-		public Accumulator(string baseDir, IList<string> files, IFileGlobber globber, string projectFile)
+		public Accumulator(string baseDir, IList<string> files, IFileGlobber globber, string projectFile, Logger logger)
 		{
 			this.baseDir = baseDir;
 			this.files = files.Select(x => new FileInfo(Path.Combine(baseDir, x)))
 				.Select(x => x.FullName).ToList();
 			this.globber = globber;
 			this.projectFile = projectFile;
+			this.logger = logger;
 		}
 
 		public void Execute()
@@ -40,7 +42,7 @@ namespace netlint.framework
 			if (missing.Any() || extra.Any())
 			{
 				var ex = new NetLintException(projectFile, missing, extra);
-				Console.WriteLine(ex.Message);
+				logger.Log(ex.Message);
 				throw ex;
 			}
 		}

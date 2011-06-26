@@ -46,6 +46,7 @@
     <Compile Include="framework\FileGlobber.cs" />
     <Compile Include="framework\IFileGlobber.cs" />
     <Compile Include="framework\IProjectFileReader.cs" />
+    <Compile Include="framework\Logger.cs" />
     <Compile Include="framework\NetLintException.cs" />
     <Compile Include="NetLint.cs" />
     <Compile Include="framework\ProjectFileReader.cs" />
