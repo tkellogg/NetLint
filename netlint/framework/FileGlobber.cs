@@ -25,7 +25,8 @@ namespace netlint.framework
 
 		private string Escape(string pattern)
 		{
-			var sb = new StringBuilder();
+			var sb = new StringBuilder("^");
+			char? lastChar = null;
 			foreach (char c in pattern)
 			{
 				switch (c)
@@ -37,8 +38,6 @@ namespace netlint.framework
 						sb.Append("[.]");
 						break;
 					case '/':
-						sb.Append("(\\\\|/)");
-						break;
 					case '\\':
 						sb.Append("(\\\\|/)");
 						break;
@@ -65,8 +64,9 @@ namespace netlint.framework
 						sb.Append(c);
 						break;
 				}
+				lastChar = c;
 			}
-			return sb.ToString();
+			return sb.Append("$").ToString();
 		}
 
 		public bool ShouldCheckFile(string filename)

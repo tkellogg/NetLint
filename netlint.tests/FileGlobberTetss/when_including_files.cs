@@ -27,6 +27,11 @@ namespace netlint.tests.FileGlobberTetss
 		[TestCase("*/file.txt", "dir/file.txt", Result = true)]
 		[TestCase("*.txt", "dir/file.txt", Result = true)]
 		[TestCase("*.txt", "file.txt", Result = true)]
+		[TestCase("*.cs", "file.csproj", Result = false)]
+		[TestCase("*/file.cs", "file.cs", Result = false)] // TODO: make this true
+		[TestCase("*/file.cs", "north/file.cs", Result = true)]
+		[TestCase("*/file.cs", "north_file.cs", Result = false)]
+		[TestCase("*/file.cs", "northfile.cs", Result = false)]
 		public bool it_includes_globs_using_the_asterik(string pattern, string file)
 		{
 			var sut = new FileGlobber();

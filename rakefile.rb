@@ -4,6 +4,9 @@ Albacore.configure do |config|
   config.nunit.command = "packages/NUnit.2.5.9.10348/Tools/nunit-console.exe"
 end
 
+desc "build and test package"
+task :default => :build_package
+
 desc "Compile netlint"
 msbuild :build do |msb|
   msb.targets = [:clean, :build]
@@ -25,14 +28,14 @@ nuspec :make_spec do |nu|
   nu.version = get_version
   nu.authors = 'Tim Kellogg'
   nu.owners = 'Tim Kellogg'
-  nu.description = "A tool for easily checking Visual Studio project files against what is actually on disk"
+  nu.description = "A quality tool for testing conventions in .NET web apps & libraries"
   nu.summary = nu.description
   nu.language = 'en-US'
   nu.licenseUrl = 'https://github.com/tkellogg/netlint/blob/master/LICENSE'
   nu.projectUrl = 'https://github.com/tkellogg/netlint'
   nu.working_directory = 'netlint/bin/Release'
   nu.output_file = 'netlint.nuspec'
-  nu.tags = 'testing'
+  nu.tags = ['unittest', 'convention', 'quality', 'Web']
 end
 
 nugetpack :build_package => [:test, :make_spec, 'dist'] do |nu|
