@@ -35,7 +35,7 @@ nuspec :make_spec do |nu|
   nu.projectUrl = 'https://github.com/tkellogg/netlint'
   nu.working_directory = 'netlint/bin/Release'
   nu.output_file = 'netlint.nuspec'
-  nu.tags = ['unittest', 'convention', 'quality', 'Web']
+  nu.tags = 'unittest convention quality Web'
 end
 
 nugetpack :build_package => [:test, :make_spec, 'dist'] do |nu|
