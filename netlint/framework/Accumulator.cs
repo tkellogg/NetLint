@@ -26,7 +26,6 @@ namespace netlint.framework
 
 		public void Execute()
 		{
-
 			foreach (var name in files)
 			{
 				var file = Path.Combine(baseDir, name);

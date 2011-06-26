@@ -64,7 +64,7 @@ namespace netlint
 
 		private static FileGlobber GetWebGlobber()
 		{
-			var g = new FileGlobber();
+			var g = GetCoreGlobber();
 			g.AddPattern("*.cshtml");
 			g.AddPattern("*.vbhtml");
 			g.AddPattern("*.html");
@@ -78,7 +78,6 @@ namespace netlint
 			g.AddPattern("*.jpg");
 			g.AddPattern("*.jpeg");
 			g.AddPattern("*.ico");
-			g.AddPattern("*.config");
 			StandardIgnores(g);
 			return g;
 		}
@@ -87,6 +86,36 @@ namespace netlint
 		{
 			g.IgnorePattern("*/bin/*");
 			g.IgnorePattern("*/obj/*");
+		}
+
+		/// <summary>
+		/// Check compilable resources that are core to any kind of project like *.cs,
+		/// *.vb, *.dll, *.config, etc.
+		/// </summary>
+		/// <param name="projName">relative or absolute path to the project file</param>
+		/// <param name="config">delegate to do extra configuration, like adding extra
+		/// patterns and ignores</param>
+		public static void CheckCoreFiles(string projName, Action<IFileGlobber> config = null)
+		{
+			var g = GetCoreGlobber();
+			StandardIgnores(g);
+
+			if (config != null)
+				config(g);
+
+			var program = new NetLint(projName);
+			program.Execute();
+		}
+
+		private static FileGlobber GetCoreGlobber()
+		{
+			var g = new FileGlobber();
+			g.AddPattern("*.cs");
+			g.AddPattern("*.vb");
+			g.AddPattern("*.fs");	// Yes, F# rocks!
+			g.AddPattern("*.dll");
+			g.AddPattern("*.config");
+			return g;
 		}
 	}
 }
