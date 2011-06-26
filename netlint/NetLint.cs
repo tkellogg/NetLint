@@ -29,7 +29,7 @@ namespace netlint
 		public void Execute()
 		{
 			var baseDir = Directory.GetParent(projName);
-			var runner = new Accumulator(baseDir.ToString(), reader.GetContents(projName), globber, projName);
+			var runner = new Accumulator(baseDir.ToString(), reader.GetContents(projName).ToList(), globber, projName);
 			runner.Execute();
 		}
 
@@ -61,7 +61,14 @@ namespace netlint
 			g.AddPattern("*.jpeg");
 			g.AddPattern("*.ico");
 			g.AddPattern("*.config");
+			StandardIgnores(g);
 			return g;
+		}
+
+		private static void StandardIgnores(FileGlobber g)
+		{
+			g.IgnorePattern("*/bin/*");
+			g.IgnorePattern("*/obj/*");
 		}
 	}
 }

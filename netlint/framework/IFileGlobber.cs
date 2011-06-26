@@ -13,5 +13,8 @@ namespace netlint.framework
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		bool ShouldCheckFile(string filename);
+
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		bool IsDirIgnored(string dirname);
 	}
 }

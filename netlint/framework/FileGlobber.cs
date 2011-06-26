@@ -75,5 +75,10 @@ namespace netlint.framework
 				&& !excludePatterns.Any(re => re.IsMatch(filename));
 		}
 
+		public bool IsDirIgnored(string dirname)
+		{
+			return excludePatterns.Any(re => re.IsMatch(dirname));
+		}
+
 	}
 }

@@ -10,15 +10,16 @@ namespace netlint.framework
 	{
 		List<string> missing = new List<string>();
 		List<string> extra = new List<string>();
-		private IEnumerable<string> files;
+		private IList<string> files;
 		private string baseDir;
 		private IFileGlobber globber;
 		private string projectFile;
 
-		public Accumulator(string baseDir, IEnumerable<string> files, IFileGlobber globber, string projectFile)
+		public Accumulator(string baseDir, IList<string> files, IFileGlobber globber, string projectFile)
 		{
 			this.baseDir = baseDir;
-			this.files = files;
+			this.files = files.Select(x => new FileInfo(Path.Combine(baseDir, x)))
+				.Select(x => x.FullName).ToList();
 			this.globber = globber;
 			this.projectFile = projectFile;
 		}
@@ -43,20 +44,17 @@ namespace netlint.framework
 
 		private void Walk(DirectoryInfo current)
 		{
-			var files = this.files.Select(x => new FileInfo(Path.Combine(baseDir, x)))
-				.Select(x => x.FullName);
-			foreach (var fsi in current.GetFileSystemInfos())
+			foreach (var f in Directory.GetFiles(current.FullName)
+				.Where(x => globber.ShouldCheckFile(x) && !files.Contains(x)))
 			{
-				if (fsi is FileInfo)
+				extra.Add(f);
+			}
+
+			foreach (var dir in current.GetDirectories())
+			{
+				if (!globber.IsDirIgnored(dir.FullName))
 				{
-					if (!files.Contains(fsi.FullName) && globber.ShouldCheckFile(fsi.FullName))
-					{
-						extra.Add(fsi.FullName);
-					}
-				}
-				else if (fsi is DirectoryInfo)
-				{
-					Walk((DirectoryInfo)fsi);
+					Walk((DirectoryInfo)dir);
 				}
 			}
 		}
