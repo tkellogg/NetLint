@@ -7,13 +7,21 @@ using System.IO;
 
 namespace netlint
 {
+	/// <summary>
+	/// Main access point for this whole utility
+	/// </summary>
 	public class NetLint 
 	{
 		private string projName;
 		private IProjectFileReader reader;
 		private IFileGlobber globber;
 
-		internal NetLint(string projName)
+		/// <summary>
+		/// Creates an empty NetLint object using a specific project file to parse. No patterns
+		/// are added by default
+		/// </summary>
+		/// <param name="projName">relative or absolute path to the project file</param>
+		public NetLint(string projName)
 			:this(projName, new FileGlobber(), null)
 		{
 			this.reader = new ProjectFileReader(this.globber);
@@ -26,6 +34,9 @@ namespace netlint
 			this.reader = reader;
 		}
 
+		/// <summary>
+		/// Execute the checks and throw a NetLintExcetion if something failed
+		/// </summary>
 		public void Execute()
 		{
 			var baseDir = Directory.GetParent(projName);
@@ -33,6 +44,13 @@ namespace netlint
 			runner.Execute();
 		}
 
+		/// <summary>
+		/// Check files you would be typically concerned about in a web project, like *.aspx,
+		/// *.html, *.js, *.css, images, *.cshtml, etc
+		/// </summary>
+		/// <param name="projName">relative or absolute path to the project file</param>
+		/// <param name="config">delegate to do extra configuration, like adding extra
+		/// patterns and ignores</param>
 		public static void CheckWebProject(string projName, Action<IFileGlobber> config=null)
 		{
 			var g = GetWebGlobber();

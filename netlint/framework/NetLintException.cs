@@ -5,6 +5,10 @@ using System.Text;
 
 namespace netlint.framework
 {
+	/// <summary>
+	/// Exception thrown when some files were found to be out of place. This includes a
+	/// friendly error message with plenty of information.
+	/// </summary>
 	public class NetLintException : ApplicationException
 	{
 		/// <summary>
@@ -17,13 +21,16 @@ namespace netlint.framework
 		/// </summary>
 		public List<string> Extra { get; private set; }
 
-		public NetLintException(string projectFile, List<string> missing, List<string> extra)
+		internal NetLintException(string projectFile, List<string> missing, List<string> extra)
 		{
 			Missing = missing;
 			Extra = extra;
 			ProjectFile = projectFile;
 		}
 
+		/// <summary>
+		/// Friendly message describing what is missing and from where
+		/// </summary>
 		public override string Message
 		{
 			get
@@ -56,6 +63,9 @@ Project File: ");
 			}
 		}
 
+		/// <summary>
+		/// The project file that appears to not be consistent
+		/// </summary>
 		public string ProjectFile { get; set; }
 	}
 }
