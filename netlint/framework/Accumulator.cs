@@ -49,8 +49,9 @@ namespace netlint.framework
 
 		private void Walk(DirectoryInfo current)
 		{
+			var lowered = files.Select(x => x.ToLowerInvariant());
 			foreach (var f in Directory.GetFiles(current.FullName)
-				.Where(x => globber.ShouldCheckFile(x) && !files.Contains(x)))
+				.Where(x => globber.ShouldCheckFile(x) && !lowered.Contains(x.ToLowerInvariant())))
 			{
 				extra.Add(f);
 			}

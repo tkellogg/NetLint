@@ -83,6 +83,7 @@
   
   <ItemGroup>
     <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Views\capitalized.cshtml" />
   </ItemGroup>
   
   <ItemGroup>

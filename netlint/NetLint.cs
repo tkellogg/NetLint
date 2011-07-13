@@ -106,7 +106,7 @@ namespace netlint
 			if (config != null)
 				config(g);
 
-			var program = new NetLint(projName);
+			var program = new NetLint(projName, g, new ProjectFileReader(g));
 			program.Execute(shouldLog);
 		}
 

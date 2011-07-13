@@ -39,7 +39,7 @@ namespace netlint.framework
 						break;
 					case '/':
 					case '\\':
-						sb.Append("(\\\\|/)");
+						sb.Append(@"(\\|/)");
 						break;
 					case '(':
 						sb.Append("[(]");
@@ -48,16 +48,16 @@ namespace netlint.framework
 						sb.Append("[)]");
 						break;
 					case '[':
-						sb.Append("\\[");
+						sb.Append(@"\[");
 						break;
 					case ']':
-						sb.Append("\\]");
+						sb.Append(@"\]");
 						break;
 					case '{':
-						sb.Append("\\{");
+						sb.Append(@"\{");
 						break;
 					case '}':
-						sb.Append("\\}");
+						sb.Append(@"\}");
 						break;
 
 					default:
@@ -71,6 +71,9 @@ namespace netlint.framework
 
 		public bool ShouldCheckFile(string filename)
 		{
+			if (!includePatterns.Any())
+				throw new InvalidOperationException("There were no include patterns found. Everything would be excluded");
+
 			return includePatterns.Any(re => re.IsMatch(filename)) 
 				&& !excludePatterns.Any(re => re.IsMatch(filename));
 		}
