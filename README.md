@@ -26,3 +26,34 @@ And if the defaults don't satisfy your needs, add extra config options:
             config.AddPattern("*.fshtml"); // coming soon ;)
         });
     }
+	
+If you're using NUnit, here is a convenient test for running through a lot of projects using the `TestCase` attribute:
+
+	[TestFixture]
+	[Category("Integration")] // these take a few seconds to complete
+	class NetLintTests
+	{
+		[Test]
+		[TestCase("kpa.common")]
+		[TestCase("kpa.common.nhibernate")]
+		[TestCase("kpa.common.nhibernate.tests")]
+		[TestCase("kpa.common.org")]
+		[TestCase("kpa.common.org.tests")]
+		[TestCase("kpa.common.tests")]
+		[TestCase("kpa.common.web")]
+		[TestCase("kpa.common.web.tests")]
+		[TestCase("kpa.common.workflow")]
+		[TestCase("kpa.common.workflow.tests")]
+		[TestCase("kpa.documents")]
+		[TestCase("kpa.documents.test")]
+		[TestCase("kpa.finance")]
+		[TestCase("kpa.finance.service")]
+		[TestCase("kpa.finance.tests")]
+		[TestCase("kpa.learning")]
+		[TestCase("kpa.learning.test")]
+		[TestCase("kpa.reporting")]
+		public void each_project_is_cononical(string name)
+		{
+			NetLint.CheckWebProject(string.Format("../../../{0}/{0}.csproj", name));
+		}
+	}

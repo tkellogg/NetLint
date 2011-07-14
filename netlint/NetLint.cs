@@ -118,6 +118,7 @@ namespace netlint
 			g.AddPattern("*.fs");	// Yes, F# rocks!
 			g.AddPattern("*.dll");
 			g.AddPattern("*.config");
+			g.AddPattern("*.hbm.xml");
 			return g;
 		}
 	}

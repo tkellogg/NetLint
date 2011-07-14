@@ -27,7 +27,9 @@ namespace netlint.framework
 				.Union(GetNodes(xml, "//{0}Compile[@Include]/@Include", ns))
 				.Union(GetNodes(xml, "//{0}Reference/HintPath", ns))
 				// .config files are included as "None"...whatever that means...
-				.Union(GetNodes(xml, "//{0}None/@Include", ns));
+				.Union(GetNodes(xml, "//{0}None/@Include", ns))
+				// This could be important for embedded resources
+				.Union(GetNodes(xml, "//{0}EmbeddedResource/@Include", ns));
 			
 			return from x in nodes
 				   where globber.ShouldCheckFile(x)
