@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using netlint.framework;
 using System.IO;
+using netlint.config;
 
 namespace netlint
 {
@@ -121,5 +122,10 @@ namespace netlint
 			g.AddPattern("*.hbm.xml");
 			return g;
 		}
+
+        /// <summary>
+        /// Fluently configure a netlint test
+        /// </summary>
+        public static IFluentConfig Configure { get { return new FluentConfig(); } }
 	}
 }
