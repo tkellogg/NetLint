@@ -42,7 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="config\FluentConfig.cs" />
     <Compile Include="config\IFluentConfig.cs" />
+    <Compile Include="config\ILaunchableConfiguration.cs" />
+    <Compile Include="config\IProjectScanConfigExpression.cs" />
+    <Compile Include="config\IProjectSelectorExpression.cs" />
+    <Compile Include="config\ProjectScanConfigExpression.cs" />
     <Compile Include="framework\Accumulator.cs" />
     <Compile Include="framework\FileGlobber.cs" />
     <Compile Include="framework\IFileGlobber.cs" />

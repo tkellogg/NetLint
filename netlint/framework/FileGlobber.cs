@@ -11,6 +11,9 @@ namespace netlint.framework
 		List<Regex> includePatterns = new List<Regex>();
 		List<Regex> excludePatterns = new List<Regex>();
 
+        internal List<Regex> IncludePatterns { get { return includePatterns; } }
+        internal List<Regex> ExcludePatterns { get { return excludePatterns; } }
+
 		public void AddPattern(string pattern)
 		{
 			var re = new Regex(Escape(pattern), RegexOptions.IgnoreCase);

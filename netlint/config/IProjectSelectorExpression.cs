@@ -7,12 +7,12 @@ using System.ComponentModel;
 namespace netlint.config
 {
     /// <summary>
-    /// root configuration interface
+    /// Select which project you need to be dealing with
     /// </summary>
-    public interface IFluentConfig
+    public interface IProjectSelectorExpression
     {
-        /// <summary>Scan project files to ensure it matches on disk</summary>
-        IFluentConfig ProjectScan(Action<IProjectSelectorExpression> config);
+        /// <summary></summary>
+        IProjectScanConfigExpression ForProject(string project);
 
         #region Hiding object members from editor
         /// <summary></summary>
