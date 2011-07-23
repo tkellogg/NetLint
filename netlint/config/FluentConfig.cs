@@ -17,6 +17,8 @@ namespace netlint.config
             this.launchers = new List<ILaunchableConfiguration>();
         }
 
+        internal List<ILaunchableConfiguration> Launchers { get { return launchers; } }
+
         IFluentConfig IFluentConfig.ProjectScan(Action<IProjectSelectorExpression> config)
         {
             var projectScanConfig = new ProjectScanConfigExpression();

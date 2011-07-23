@@ -8,42 +8,57 @@ namespace netlint.config
 {
     class ProjectScanConfigExpression : IProjectSelectorExpression, IProjectScanConfigExpression, ILaunchableConfiguration
     {
+        public ProjectScanConfigExpression()
+        {
+            Globber = new FileGlobber();
+        }
 
-        public IFileGlobber Globber { get { return null; } }
+        public IFileGlobber Globber { private set; get; }
+        public string Project { get; set; }
 
         IProjectScanConfigExpression IProjectSelectorExpression.ForProject(string project)
         {
-            throw new NotImplementedException();
+            Project = project;
+            return this;
         }
 
         public IProjectScanConfigExpression WithIgnores(params string[] ignorePatterns)
         {
-            throw new NotImplementedException();
+            foreach (var pattern in ignorePatterns)
+            {
+                Globber.IgnorePattern(pattern);
+            }
+            return this;
         }
 
         public IProjectScanConfigExpression WithIncludes(params string[] includePatterns)
         {
-            throw new NotImplementedException();
+            foreach (var pattern in includePatterns)
+            {
+                Globber.AddPattern(pattern);
+            }
+            return this;
         }
 
         public IProjectScanConfigExpression WithStandardExcludes()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public IProjectScanConfigExpression WithStandardIncludes()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public IProjectScanConfigExpression WithWebProjectIncludes()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public IProjectScanConfigExpression IncludingEverything()
         {
-            throw new NotImplementedException();
+            Globber.AddPattern("*");
+            return this;
         }
 
         void ILaunchableConfiguration.Launch()
