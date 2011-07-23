@@ -11,8 +11,8 @@ namespace netlint.framework
 		List<Regex> includePatterns = new List<Regex>();
 		List<Regex> excludePatterns = new List<Regex>();
 
-        internal List<Regex> IncludePatterns { get { return includePatterns; } }
-        internal List<Regex> ExcludePatterns { get { return excludePatterns; } }
+		internal List<Regex> IncludePatterns { get { return includePatterns; } }
+		internal List<Regex> ExcludePatterns { get { return excludePatterns; } }
 
 		public void AddPattern(string pattern)
 		{
@@ -85,6 +85,15 @@ namespace netlint.framework
 		{
 			return excludePatterns.Any(re => re.IsMatch(dirname));
 		}
+
+		public static string[] WebGlobberPatterns = new[] { "*.cshtml", "*.vbhtml",
+				"*.html", "*.aspx", "*.ascx", "*.asax", "*.js", "*.css", "*.gif", "*.png",
+				"*.jpg", "*.jpeg", "*.ico", "*.htm" };
+
+		public static string[] StandardIgnores = new[] { "*/bin/*", "*/obj/*" };
+
+		public static string[] StandardIncludes = new[] { "*.cs", "*.vb", "*.fs", "*.dll", 
+				"*.config", "*.hbm.xml" };
 
 	}
 }

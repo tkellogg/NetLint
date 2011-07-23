@@ -68,27 +68,22 @@ namespace netlint
 		private static FileGlobber GetWebGlobber()
 		{
 			var g = GetCoreGlobber();
-			g.AddPattern("*.cshtml");
-			g.AddPattern("*.vbhtml");
-			g.AddPattern("*.html");
-			g.AddPattern("*.aspx");
-			g.AddPattern("*.ascx");
-			g.AddPattern("*.asax");
-			g.AddPattern("*.js");
-			g.AddPattern("*.css");
-			g.AddPattern("*.gif");
-			g.AddPattern("*.png");
-			g.AddPattern("*.jpg");
-			g.AddPattern("*.jpeg");
-			g.AddPattern("*.ico");
+
+			foreach (var pattern in FileGlobber.WebGlobberPatterns)
+			{
+				g.AddPattern(pattern);
+			}
+
 			StandardIgnores(g);
 			return g;
 		}
 
 		private static void StandardIgnores(FileGlobber g)
 		{
-			g.IgnorePattern("*/bin/*");
-			g.IgnorePattern("*/obj/*");
+			foreach (var pattern in FileGlobber.StandardIgnores)
+			{
+				g.IgnorePattern(pattern);
+			}
 		}
 
 		/// <summary>
@@ -114,18 +109,16 @@ namespace netlint
 		private static FileGlobber GetCoreGlobber()
 		{
 			var g = new FileGlobber();
-			g.AddPattern("*.cs");
-			g.AddPattern("*.vb");
-			g.AddPattern("*.fs");	// Yes, F# rocks!
-			g.AddPattern("*.dll");
-			g.AddPattern("*.config");
-			g.AddPattern("*.hbm.xml");
+			foreach (var pattern in FileGlobber.StandardIncludes)
+			{
+				g.AddPattern(pattern);
+			}
 			return g;
 		}
 
-        /// <summary>
-        /// Fluently configure a netlint test
-        /// </summary>
-        public static IFluentConfig Configure { get { return new FluentConfig(); } }
+		/// <summary>
+		/// Fluently configure a netlint test
+		/// </summary>
+		public static IFluentConfig Configure { get { return new FluentConfig(); } }
 	}
 }
