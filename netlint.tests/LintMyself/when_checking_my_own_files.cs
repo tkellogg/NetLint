@@ -20,7 +20,7 @@ namespace netlint.tests.LintMyself
 				config.ForProject(@"..\..\netlint.tests.csproj")
 					.StartingWithEverything()
 					.ExcludeStandardPatterns()
-					.AlsoExclude("*/fixtures/*", "*.VisualState.xml", "*.user", "*/TestResult.xml")
+					.Exclude("*/fixtures/*", "*.VisualState.xml", "*.user", "*/TestResult.xml")
 			).Execute();
 		}
 	}

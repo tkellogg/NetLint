@@ -22,7 +22,7 @@ namespace netlint.config
 			return this;
 		}
 
-		public IProjectScanConfigExpression AlsoExclude(params string[] ignorePatterns)
+		public IProjectScanConfigExpression Exclude(params string[] ignorePatterns)
 		{
 			foreach (var pattern in ignorePatterns)
 			{
@@ -31,7 +31,7 @@ namespace netlint.config
 			return this;
 		}
 
-		public IProjectScanConfigExpression AlsoInclude(params string[] includePatterns)
+		public IProjectScanConfigExpression Include(params string[] includePatterns)
 		{
 			foreach (var pattern in includePatterns)
 			{

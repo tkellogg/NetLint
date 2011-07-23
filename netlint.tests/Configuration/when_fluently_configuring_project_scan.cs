@@ -16,8 +16,8 @@ namespace netlint.tests.Configuration
         {
             var c = NetLint.Configure.ProjectScan(config =>
                 config.ForProject("escarow.fsproj")
-                    .AlsoInclude("*.jpg", "*.fs")
-                    .AlsoExclude("IMG_*.*"));
+                    .Include("*.jpg", "*.fs")
+                    .Exclude("IMG_*.*"));
 
             var globber = GetGlobber(c);
 
