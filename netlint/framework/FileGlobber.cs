@@ -90,7 +90,8 @@ namespace netlint.framework
 				"*.html", "*.aspx", "*.ascx", "*.asax", "*.js", "*.css", "*.gif", "*.png",
 				"*.jpg", "*.jpeg", "*.ico", "*.htm" };
 
-		public static string[] StandardIgnores = new[] { "*/bin/*", "*/obj/*" };
+		public static string[] StandardIgnores = new[] { "*/bin/*", "*/obj/*", 
+			"*.csproj", "*.vbproj", "*.fsproj" };
 
 		public static string[] StandardIncludes = new[] { "*.cs", "*.vb", "*.fs", "*.dll", 
 				"*.config", "*.hbm.xml" };

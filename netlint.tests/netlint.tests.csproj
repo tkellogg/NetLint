@@ -63,6 +63,7 @@
     <Compile Include="FileGlobberTetss\when_using_regex_characters.cs" />
     <Compile Include="IntegrationTests\when_project_is_missing_files.cs" />
     <Compile Include="IntegrationTests\when_some_files_are_missing_on_disk.cs" />
+    <Compile Include="LintMyself\when_checking_my_own_files.cs" />
     <Compile Include="ProjectFileReaderTests\when_reading_projects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

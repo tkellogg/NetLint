@@ -21,11 +21,19 @@ namespace netlint.framework
 		/// </summary>
 		public List<string> Extra { get; private set; }
 
+		public List<NetLintException> InnerExceptions { get; private set; }
+
 		internal NetLintException(string projectFile, List<string> missing, List<string> extra)
 		{
 			Missing = missing;
 			Extra = extra;
 			ProjectFile = projectFile;
+			InnerExceptions = new List<NetLintException>();
+		}
+
+		internal void Add(NetLintException additional)
+		{
+			InnerExceptions.Add(additional);
 		}
 
 		/// <summary>
@@ -49,6 +57,12 @@ Project File: ");
 				{
 					sb.Append("\r\nFiles on disk missing from project: \r\n");
 					AppendFiles(sb, Extra);
+				}
+
+				foreach (var ex in InnerExceptions)
+				{
+					sb.AppendLine("-----------------------------------");
+					sb.AppendLine(ex.Message);
 				}
 				
 				return sb.ToString();

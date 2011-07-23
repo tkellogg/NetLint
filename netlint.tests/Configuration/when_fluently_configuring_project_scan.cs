@@ -16,8 +16,8 @@ namespace netlint.tests.Configuration
         {
             var c = NetLint.Configure.ProjectScan(config =>
                 config.ForProject("escarow.fsproj")
-                    .WithIncludes("*.jpg", "*.fs")
-                    .WithIgnores("IMG_*.*"));
+                    .AlsoInclude("*.jpg", "*.fs")
+                    .AlsoExclude("IMG_*.*"));
 
             var globber = GetGlobber(c);
 
@@ -37,7 +37,7 @@ namespace netlint.tests.Configuration
         public void including_everything_is_just_a_single_pattern()
         {
             var c = NetLint.Configure.ProjectScan(config =>
-                config.ForProject("escarow.fsproj").IncludingEverything());
+                config.ForProject("escarow.fsproj").StartingWithEverything());
 
             var globber = GetGlobber(c);
 
@@ -49,7 +49,7 @@ namespace netlint.tests.Configuration
         public void the_standard_includes_adds_some_patterns()
         {
             var c = NetLint.Configure.ProjectScan(config =>
-                config.ForProject("escarow.fsproj").WithStandardIncludes());
+                config.ForProject("escarow.fsproj").IncludeStandardFiles());
 
             var globber = GetGlobber(c);
             Assert.That(globber.IncludePatterns, Has.Count.GreaterThan(0));
@@ -59,7 +59,7 @@ namespace netlint.tests.Configuration
         public void the_standard_excludes_adds_some_patterns()
         {
             var c = NetLint.Configure.ProjectScan(config =>
-                config.ForProject("escarow.fsproj").WithStandardExcludes());
+                config.ForProject("escarow.fsproj").ExcludeStandardPatterns());
 
             var globber = GetGlobber(c);
             Assert.That(globber.ExcludePatterns, Has.Count.GreaterThan(0));
@@ -69,7 +69,7 @@ namespace netlint.tests.Configuration
         public void the_standard_web_includes_adds_some_patterns()
         {
             var c = NetLint.Configure.ProjectScan(config =>
-                config.ForProject("escarow.fsproj").WithWebProjectIncludes());
+                config.ForProject("escarow.fsproj").IncludeWebFiles());
 
             var globber = GetGlobber(c);
             Assert.That(globber.IncludePatterns, Has.Count.GreaterThan(0));

@@ -29,10 +29,25 @@ namespace netlint.config
 
 		void IFluentConfig.Execute()
 		{
+			NetLintException exception = null;
+
 			foreach (var launcher in launchers)
 			{
-				launcher.Launch();
+				try
+				{
+					launcher.Launch();
+				}
+				catch (NetLintException e)
+				{
+					if (exception == null)
+						exception = e;
+					else
+						exception.Add(e);
+				}
 			}
+
+			if (exception != null)
+				throw exception;
 		}
 	}
 }

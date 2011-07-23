@@ -16,7 +16,7 @@ namespace netlint.tests.Configuration
 			Assert.Throws<NetLintException>(() =>
 				NetLint.Configure.ProjectScan(config =>
 					config.ForProject(@"..\..\fixtures\TooManyFiles\TooManyFiles.csproj")
-						.WithWebProjectIncludes()
+						.IncludeWebFiles()
 				).Execute()
 			);
 		}

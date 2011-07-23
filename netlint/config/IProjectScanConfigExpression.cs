@@ -10,17 +10,17 @@ namespace netlint.config
     public interface IProjectScanConfigExpression
     {
         /// <summary></summary>
-        IProjectScanConfigExpression WithIgnores(params string[] ignorePatterns);
+        IProjectScanConfigExpression AlsoExclude(params string[] ignorePatterns);
         /// <summary></summary>
-        IProjectScanConfigExpression WithIncludes(params string[] includePatterns);
+        IProjectScanConfigExpression AlsoInclude(params string[] includePatterns);
         /// <summary></summary>
-        IProjectScanConfigExpression WithStandardExcludes();
+        IProjectScanConfigExpression ExcludeStandardPatterns();
         /// <summary></summary>
-        IProjectScanConfigExpression WithStandardIncludes();
+        IProjectScanConfigExpression IncludeStandardFiles();
         /// <summary></summary>
-        IProjectScanConfigExpression WithWebProjectIncludes();
-        /// <summary></summary>
-        IProjectScanConfigExpression IncludingEverything();
+        IProjectScanConfigExpression IncludeWebFiles();
+        /// <summary>Include everything to start</summary>
+        IProjectScanConfigExpression StartingWithEverything();
 
         #region Hiding object members from editor
         /// <summary></summary>

@@ -22,7 +22,7 @@ namespace netlint.config
 			return this;
 		}
 
-		public IProjectScanConfigExpression WithIgnores(params string[] ignorePatterns)
+		public IProjectScanConfigExpression AlsoExclude(params string[] ignorePatterns)
 		{
 			foreach (var pattern in ignorePatterns)
 			{
@@ -31,7 +31,7 @@ namespace netlint.config
 			return this;
 		}
 
-		public IProjectScanConfigExpression WithIncludes(params string[] includePatterns)
+		public IProjectScanConfigExpression AlsoInclude(params string[] includePatterns)
 		{
 			foreach (var pattern in includePatterns)
 			{
@@ -40,7 +40,7 @@ namespace netlint.config
 			return this;
 		}
 
-		public IProjectScanConfigExpression WithStandardExcludes()
+		public IProjectScanConfigExpression ExcludeStandardPatterns()
 		{
 			foreach (var pattern in FileGlobber.StandardIgnores)
 			{
@@ -49,7 +49,7 @@ namespace netlint.config
 			return this;
 		}
 
-		public IProjectScanConfigExpression WithStandardIncludes()
+		public IProjectScanConfigExpression IncludeStandardFiles()
 		{
 			foreach (var pattern in FileGlobber.StandardIncludes)
 			{
@@ -58,7 +58,7 @@ namespace netlint.config
 			return this;
 		}
 
-		public IProjectScanConfigExpression WithWebProjectIncludes()
+		public IProjectScanConfigExpression IncludeWebFiles()
 		{
 			foreach (var pattern in FileGlobber.WebGlobberPatterns)
 			{
@@ -67,7 +67,7 @@ namespace netlint.config
 			return this;
 		}
 
-		public IProjectScanConfigExpression IncludingEverything()
+		public IProjectScanConfigExpression StartingWithEverything()
 		{
 			Globber.AddPattern("*");
 			return this;
