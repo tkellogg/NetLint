@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\when_executing_a_fluently_configured_batch.cs" />
     <Compile Include="Configuration\when_fluently_configuring_project_scan.cs" />
     <Compile Include="FileGlobberTetss\when_excluding_files.cs" />
     <Compile Include="FileGlobberTetss\when_filenames_have_mismatched_case.cs" />

@@ -75,7 +75,8 @@ namespace netlint.config
 
 		void ILaunchableConfiguration.Launch()
 		{
-			throw new NotImplementedException();
+			var runner = new NetLint(Project, Globber, new ProjectFileReader(Globber));
+			runner.Execute(true);
 		}
 	}
 }
