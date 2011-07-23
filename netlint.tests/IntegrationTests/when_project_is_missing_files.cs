@@ -18,7 +18,7 @@ namespace netlint.tests.IntegrationTests
 				NetLint.CheckWebProject(@"..\..\fixtures\TooManyFiles\TooManyFiles.csproj");
 				Assert.Fail("we're supposed to be testing the exception here");
 			}
-			catch (NetLintException e)
+			catch (NetLintProjectScanException e)
 			{
 				Assert.That(e.Extra, Has.Count.EqualTo(3));
 			}

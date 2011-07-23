@@ -9,7 +9,7 @@ namespace netlint.framework
 	/// Exception thrown when some files were found to be out of place. This includes a
 	/// friendly error message with plenty of information.
 	/// </summary>
-	public class NetLintException : ApplicationException
+	public class NetLintProjectScanException : ApplicationException
 	{
 		/// <summary>
 		/// Indicates files that are missing from disk
@@ -21,17 +21,17 @@ namespace netlint.framework
 		/// </summary>
 		public List<string> Extra { get; private set; }
 
-		public List<NetLintException> InnerExceptions { get; private set; }
+		public List<NetLintProjectScanException> InnerExceptions { get; private set; }
 
-		internal NetLintException(string projectFile, List<string> missing, List<string> extra)
+		internal NetLintProjectScanException(string projectFile, List<string> missing, List<string> extra)
 		{
 			Missing = missing;
 			Extra = extra;
 			ProjectFile = projectFile;
-			InnerExceptions = new List<NetLintException>();
+			InnerExceptions = new List<NetLintProjectScanException>();
 		}
 
-		internal void Add(NetLintException additional)
+		internal void Add(NetLintProjectScanException additional)
 		{
 			InnerExceptions.Add(additional);
 		}

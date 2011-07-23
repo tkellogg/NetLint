@@ -41,7 +41,7 @@ namespace netlint.framework
 
 			if (missing.Any() || extra.Any())
 			{
-				var ex = new NetLintException(projectFile, missing, extra);
+				var ex = new NetLintProjectScanException(projectFile, missing, extra);
 				logger.Log(ex.Message);
 				throw ex;
 			}

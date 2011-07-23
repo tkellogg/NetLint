@@ -13,7 +13,7 @@ namespace netlint.tests.Configuration
 		[Test]
 		public void it_can_run_a_single_project_scan()
 		{
-			Assert.Throws<NetLintException>(() =>
+			Assert.Throws<NetLintProjectScanException>(() =>
 				NetLint.Configure.ProjectScan(config =>
 					config.ForProject(@"..\..\fixtures\TooManyFiles\TooManyFiles.csproj")
 						.IncludeWebFiles()

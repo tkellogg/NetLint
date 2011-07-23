@@ -29,7 +29,7 @@ namespace netlint.config
 
 		void IFluentConfig.Execute()
 		{
-			NetLintException exception = null;
+			NetLintProjectScanException exception = null;
 
 			foreach (var launcher in launchers)
 			{
@@ -37,7 +37,7 @@ namespace netlint.config
 				{
 					launcher.Launch();
 				}
-				catch (NetLintException e)
+				catch (NetLintProjectScanException e)
 				{
 					if (exception == null)
 						exception = e;
