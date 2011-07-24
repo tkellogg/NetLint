@@ -67,6 +67,7 @@
     <Compile Include="ProjectFileReaderTests\when_reading_projects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\AssemblyScanner\when_selecting_assemblies.cs" />
+    <Compile Include="Reflection\BaseTypeSelector\when_scanning_for_types.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

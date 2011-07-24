@@ -18,7 +18,7 @@ namespace netlint.config
 		/// <summary>
 		/// Select types for which to compare metadata
 		/// </summary>
-		IFluentConfig TypeCompare(Action<IAssemblySelectorExpression<ITypeCompareSelectorExpression>> config);
+		IFluentConfig TypeCompare(Action<IAssemblySelectorExpression<IBaseTypeSelectorExpression>> config);
 
 		/// <summary>Execute the configuration</summary>
 		void Execute();

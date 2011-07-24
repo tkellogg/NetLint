@@ -51,7 +51,7 @@ namespace netlint.config
 				throw exception;
 		}
 
-		IFluentConfig IFluentConfig.TypeCompare(Action<IAssemblySelectorExpression<ITypeCompareSelectorExpression>> config)
+		IFluentConfig IFluentConfig.TypeCompare(Action<IAssemblySelectorExpression<IBaseTypeSelectorExpression>> config)
 		{
 			throw new NotImplementedException();
 		}

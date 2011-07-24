@@ -44,12 +44,13 @@
   <ItemGroup>
     <Compile Include="config\FluentConfig.cs" />
     <Compile Include="reflection\AssemblySelectorExpression.cs" />
+    <Compile Include="reflection\BaseTypeSelectorExpression.cs" />
     <Compile Include="reflection\IAssemblySelectorExpression.cs" />
     <Compile Include="config\IFluentConfig.cs" />
     <Compile Include="config\ILaunchableConfiguration.cs" />
     <Compile Include="config\IProjectScanConfigExpression.cs" />
     <Compile Include="config\IProjectSelectorExpression.cs" />
-    <Compile Include="reflection\ITypeCompareSelectorExpression.cs" />
+    <Compile Include="reflection\IBaseTypeSelectorExpression.cs" />
     <Compile Include="config\ProjectScanConfigExpression.cs" />
     <Compile Include="framework\Accumulator.cs" />
     <Compile Include="framework\FileGlobber.cs" />
