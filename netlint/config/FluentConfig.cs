@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using netlint.framework;
+using netlint.reflection;
 
 namespace netlint.config
 {
@@ -48,6 +49,11 @@ namespace netlint.config
 
 			if (exception != null)
 				throw exception;
+		}
+
+		IFluentConfig IFluentConfig.TypeCompare(Action<IAssemblySelectorExpression<ITypeCompareSelectorExpression>> config)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

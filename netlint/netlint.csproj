@@ -43,17 +43,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="config\FluentConfig.cs" />
+    <Compile Include="reflection\AssemblySelectorExpression.cs" />
+    <Compile Include="reflection\IAssemblySelectorExpression.cs" />
     <Compile Include="config\IFluentConfig.cs" />
     <Compile Include="config\ILaunchableConfiguration.cs" />
     <Compile Include="config\IProjectScanConfigExpression.cs" />
     <Compile Include="config\IProjectSelectorExpression.cs" />
+    <Compile Include="reflection\ITypeCompareSelectorExpression.cs" />
     <Compile Include="config\ProjectScanConfigExpression.cs" />
     <Compile Include="framework\Accumulator.cs" />
     <Compile Include="framework\FileGlobber.cs" />
     <Compile Include="framework\IFileGlobber.cs" />
     <Compile Include="framework\IProjectFileReader.cs" />
     <Compile Include="framework\Logger.cs" />
-    <Compile Include="framework\NetLintException.cs" />
+    <Compile Include="framework\NetLintProjectScanException.cs" />
     <Compile Include="NetLint.cs" />
     <Compile Include="framework\ProjectFileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

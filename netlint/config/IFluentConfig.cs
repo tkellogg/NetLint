@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using netlint.reflection;
 
 namespace netlint.config
 {
@@ -13,6 +14,11 @@ namespace netlint.config
 	{
 		/// <summary>Scan project files to ensure it matches on disk</summary>
 		IFluentConfig ProjectScan(Action<IProjectSelectorExpression> config);
+
+		/// <summary>
+		/// Select types for which to compare metadata
+		/// </summary>
+		IFluentConfig TypeCompare(Action<IAssemblySelectorExpression<ITypeCompareSelectorExpression>> config);
 
 		/// <summary>Execute the configuration</summary>
 		void Execute();
