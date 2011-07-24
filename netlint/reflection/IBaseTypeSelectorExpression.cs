@@ -9,23 +9,26 @@ namespace netlint.reflection
 	/// from</summary>
 	public interface IBaseTypeSelectorExpression
 	{
-		/// <summary></summary>
+		/// <summary>Select base class or interface</summary>
 		IBaseTypeSelectorExpression Using<T>();
-	
-		/// <summary></summary>
+
+		/// <summary>Select base classes or interfaces</summary>
 		IBaseTypeSelectorExpression Using(params Type[] types);
-		
-		/// <summary></summary>
+
+		/// <summary>Select base classes or interfaces that are based on this other type</summary>
 		IBaseTypeSelectorExpression UsingTypesBasedOn<T>();
-		
-		/// <summary></summary>
+
+		/// <summary>Select base classes or interfaces that are based on this other type</summary>
 		IBaseTypeSelectorExpression UsingTypesBasedOn(params Type[] types);
-		
-		/// <summary></summary>
+
+		/// <summary>Select base classes or interfaces that have this attribute</summary>
 		IBaseTypeSelectorExpression UsingTypesThatHave<TAttribute>()
 			where TAttribute : Attribute;
 
-		/// <summary></summary>
+		/// <summary>Select base classes or interfaces in a particular interface</summary>
 		IBaseTypeSelectorExpression UsingInterfacesInNamespaceOf<T>();
+
+		/// <summary></summary>
+		ITypeComareSelectorExpression AsComparedTo { get; }
 	}
 }

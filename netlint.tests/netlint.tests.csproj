@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\AssemblyScanner\when_selecting_assemblies.cs" />
     <Compile Include="Reflection\BaseTypeSelector\when_scanning_for_types.cs" />
+    <Compile Include="Reflection\ComparedTypeSelector\when_selecting_types_to_join_with.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -92,5 +92,10 @@ namespace netlint.reflection
 			Predicates.Add(t => t.Namespace == @namespace && t.IsInterface);
 			return this;
 		}
+
+		public ITypeComareSelectorExpression AsComparedTo
+		{
+			get { return new TypeCompareSelectorExpression(Enumerate(), assemblies); }
+		}
 	}
 }
